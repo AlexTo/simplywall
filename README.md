@@ -40,7 +40,7 @@ Keycloak is an open source software product to allow single sign-on with Identit
 
 ##### 5. GraphQL API Micro Services
 
-The API supports GraphQL for minimal bandwidth consumption. The clients only need to request for necessary data and that could make a huge different in the context of mobile applications with low bandwidth.  
+The API supports GraphQL for minimal bandwidth consumption. The clients only need to request for necessary data and that could make a huge difference in the context of mobile applications with low bandwidth.  
 
 ##### 6. Frontend
 
