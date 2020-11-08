@@ -1,4 +1,4 @@
-### Installation
+## Installation
 
 The easiest way is to install via Docker
 
@@ -8,13 +8,17 @@ $ cd docker/demo
 $ docker-compose up
 ```
 
-Grab your coffee, the process may take a couple of minutes to download and start up ;)
+Grab your coffee, the process may take a couple of minutes to download and start up ;). 
 
-A link to the app in action is hosted on Youtube [https://youtu.be/eF4h0ku1XTQ](https://youtu.be/eF4h0ku1XTQ)
+Once done, open your browser and navigate to `http://localhost:3000/`
+
+Login with `username: alexto` and `password: password`. Enjoy! ;) 
+
+A video of the app in action is hosted on Youtube [https://youtu.be/eF4h0ku1XTQ](https://youtu.be/eF4h0ku1XTQ)
 
 ![](simplywall.png)
 
-### Architecture
+## Architecture
 
 The system is designed with micro-services architecture. The key components are as follows:
 
