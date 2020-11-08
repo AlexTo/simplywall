@@ -4,7 +4,7 @@ The easiest way is to install via Docker
 
 ```
 $ git clone https://github.com/AlexTo/simplywall.git
-$ cd docker/demo
+$ cd simplywall/docker/demo
 $ docker-compose up
 ```
 
