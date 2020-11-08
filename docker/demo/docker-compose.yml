@@ -1,0 +1,94 @@
+version: '3.1'
+services:
+  postgres:
+    build:
+      context: Postgres
+      args:
+        - POSTGRES_USER=simplywall
+        - POSTGRES_PASSWORD=password
+        - POSTGRES_DB=simplywall
+    image: simplywall_demo:postgres
+    hostname: postgres
+    container_name: simplywall_postgres
+    networks:
+      - simplywall
+
+  keycloak:
+    image: jboss/keycloak
+    hostname: keycloak
+    container_name: simplywall_keycloak
+    ports:
+      - 9000:8080
+    environment:
+      KEYCLOAK_USER: simplywall
+      KEYCLOAK_PASSWORD: password
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_USER: simplywall
+      DB_PASSWORD: password
+      DB_DATABASE: simplywall
+    networks:
+      - simplywall
+    depends_on:
+      - postgres
+
+  eureka:
+    image: tonhudung/simplywall_demo:eureka
+    hostname: eureka
+    container_name: simplywall_eureka
+    restart: on-failure
+    ports:
+      - 9001:8761
+    networks:
+      - simplywall
+    depends_on:
+      - postgres
+      - keycloak
+
+  config:
+    image: simplywall_demo:config
+    hostname: config
+    container_name: simplywall_config
+    restart: on-failure
+    networks:
+      - simplywall
+    depends_on:
+      - eureka
+
+  gateway:
+    image: tonhudung/simplywall_demo:gateway
+    hostname: gateway
+    container_name: simplywall_gateway
+    restart: on-failure
+    ports:
+      - 9002:8080
+    networks:
+      - simplywall
+    depends_on:
+      - config
+
+  api_1:
+    image: tonhudung/simplywall_demo:api
+    hostname: api_1
+    container_name: simplywall_api_1
+    restart: on-failure
+    networks:
+      - simplywall
+    depends_on:
+      - gateway
+
+  ui:
+    image: tonhudung/simplywall_demo:ui
+    hostname: ui
+    stdin_open: true
+    container_name: simplywall_ui
+    restart: on-failure
+    ports:
+      - 3000:3000
+    networks:
+      - simplywall
+    depends_on:
+      - api_1
+
+networks:
+  simplywall:

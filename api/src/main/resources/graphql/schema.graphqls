@@ -1,0 +1,65 @@
+schema {
+    query: Query
+}
+
+type Query {
+    companies(page: Int!, size: Int!, orderBy: String!, order: String!, searchTerm: String, minScore: Int, maxScore: Int): CompanyPage!
+    companyPriceCloses(page: Int!, size: Int!, companyId: String!): CompanyPriceClosePage!
+    companyScore(companyId: String!): CompanyScore
+}
+
+type Company {
+    id: ID!
+    name: String
+    tickerSymbol: String
+    exchangeSymbol: String
+    uniqueSymbol: String
+    dateGenerated: Int
+    securityName: String
+    exchangeCountryISO: String
+    listingCurrencyISO: String
+    canonicalURL: String
+    uniqueSymbolSlug: String
+    companyScore: CompanyScore
+    lastKnownSharePrice: CompanyPriceClose
+}
+
+type CompanyScore {
+    id: ID!
+    dateGenerated: Int
+    dividend: Int
+    future: Int
+    health: Int
+    management: Int
+    past: Int
+    value: Int
+    misc: Int
+    total: Int
+    sentence: String
+}
+type CompanyPriceClose {
+    id: ID!
+    date: Int
+    company: Company!
+    price: Float
+    dateCreated: Int
+}
+
+type CompanyPage {
+    totalElements: Int!
+    totalPages: Int!
+    isEmpty: Boolean!
+    hasNext: Boolean!
+    hasPrevious: Boolean!
+    companies: [Company!]
+}
+
+type CompanyPriceClosePage {
+    totalElements: Int!
+    totalPages: Int!
+    isEmpty: Boolean!
+    hasNext: Boolean!
+    hasPrevious: Boolean!
+    companyPriceCloses: [CompanyPriceClose!]
+}
+

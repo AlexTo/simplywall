@@ -1,0 +1,43 @@
+version: '3.1'
+services:
+  postgres:
+    build:
+      context: Postgres
+      args:
+        - POSTGRES_USER=simplywall
+        - POSTGRES_PASSWORD=password
+        - POSTGRES_DB=simplywall
+    image: simplywall:postgres
+    hostname: postgres
+    container_name: postgres
+    ports:
+      - 5433:5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - simplywall
+
+  keycloak:
+    image: jboss/keycloak
+    hostname: keycloak
+    container_name: keycloak
+    ports:
+      - 9000:8080
+    environment:
+      KEYCLOAK_USER: simplywall
+      KEYCLOAK_PASSWORD: password
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_USER: simplywall
+      DB_PASSWORD: password
+      DB_DATABASE: simplywall
+    networks:
+      - simplywall
+    depends_on:
+      - postgres
+
+volumes:
+  postgres:
+
+networks:
+  simplywall:

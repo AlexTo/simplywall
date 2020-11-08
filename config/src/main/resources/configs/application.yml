@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/simplywall
+    username: simplywall
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: create
+    generate-ddl: true
+    show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://keycloak:8080/auth/realms/simplywall/protocol/openid-connect/certs
+      client:
+        registration:
+          oauth2:
+            provider: keycloak
+            client-id: simplywall-service
+            client-secret: a5a51b54-4990-4efc-b6d2-fecbdd7d6a88
+            authorizationGrantType: client_credentials
+            scope: service_access
+        provider:
+          keycloak:
+            issuer-uri: http://keycloak:8080/auth/realms/simplywall
+            authorization-uri: http://keycloak:8080/auth/realms/simplywall/protocol/openid-connect/auth
+            token-uri: http://keycloak:8080/auth/realms/simplywall/protocol/openid-connect/token
+            user-info-uri: http://keycloak:8080/auth/realms/simplywall/protocol/openid-connect/userinfo
+            jwk-set-uri: http://keycloak:8080/auth/realms/simplywall/protocol/openid-connect/certs
+            user-name-attribute: preferred_username
+security:
+  oauth2:
+    client:
+      client-id: simplywall-service
+      client-secret: a5a51b54-4990-4efc-b6d2-fecbdd7d6a88
+      grant-type: client_credentials
+      access-token-uri: http://keycloak:8080/auth/realms/simplywall/protocol/openid-connect/token
+      scope: service_access
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - TokenRelay=
+        - RemoveRequestHeader=Cookie
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
