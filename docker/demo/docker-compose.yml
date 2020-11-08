@@ -46,7 +46,7 @@ services:
       - keycloak
 
   config:
-    image: simplywall_demo:config
+    image: tonhudung/simplywall_demo:config
     hostname: config
     container_name: simplywall_config
     restart: on-failure
