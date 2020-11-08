@@ -16,7 +16,7 @@ Login with `username: alexto` and `password: password`. Enjoy! ;)
 
 A video of the app in action is hosted on Youtube [https://youtu.be/eF4h0ku1XTQ](https://youtu.be/eF4h0ku1XTQ)
 
-![](simplywall.png)
+[![](simplywall.png)](https://youtu.be/eF4h0ku1XTQ)
 
 ## Architecture
 
